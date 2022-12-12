@@ -5,6 +5,14 @@ class App(tk.Tk):
 
     def __init__(self):
         super().__init__()
+        global pessoa , email , grupo
+        pessoa = []
+        email = []
+        grupo = dict()
+
+
+
+        print(grupo)
         self.title('Cadastro de Nome e Email')
         self.geometry("300x300")
 
@@ -13,7 +21,7 @@ class App(tk.Tk):
 
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
-        self.columnconfigure(2, weight=1)
+        self.columnconfigure(5, weight=1)
 
         self.create_widgets()
 
@@ -45,13 +53,19 @@ class App(tk.Tk):
 
 
     def submit(self):
-        global cont
+        global cont , pessoa, email , grupo
 
         cont += 1
         while True:
             self.output_label.config(text=' Nome: ' + self.name_var.get() + ' Email: ' + self.email_var.get())
             self.output_label = ttk.Label(self)
             self.output_label.grid(column=0, row=cont, columnspan=5)
+            pessoa.append(self.name_var.get())
+            email.append(self.email_var.get())
+            grupo['Nomes'] = pessoa[:]
+            grupo['Emails'] = email[:]
+            print(grupo['Emails'])
+
             self.name_var.set('')
             self.email_var.set('')
             break
